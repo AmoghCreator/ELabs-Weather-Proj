@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <script>
+         var weather = "hello";
+         async function getWeather() {
+             await fetch("https://api.openweathermap.org/data/2.5/weather?q=alaska&appid=d9daed1b0f560c80c1fd4ecd6a4ee5ca").then(response => response.json()).then(data =>  {weather = data});
+              var day = new Date();
+              document.body.querySelector("#heading").innerHTML = weather.name;
+              document.body.querySelector("#weimg").src = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`
+              document.body.querySelector("#date").innerHTML = day.toDateString();
+              document.body.querySelector("#condition").innerHTML = weather.weather[0].main;
+              document.body.querySelector("#temprature").innerHTML = (weather.main.temp-273.15).toFixed(2);
+              console.log(weather)
+         }
+         getWeather();
+       
+    </script>
+</head>
+<body>
+   <main>
+        <h2 id="date">Date</h2>
+        <h2 id="heading">City</h1>
+        <img src="" alt="" id="weimg"> 
+        <h2 id="condition">Condition</h2>
+        <h1 id="temprature">Temp</h1>
+   </main> 
+</body>
+</html>
